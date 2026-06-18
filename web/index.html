@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>WorkRank</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="phone-frame">
+    <!-- SPLASH -->
+    <div id="screen-splash" class="screen active">
+      <div class="splash-bg">
+        <div class="splash-logo">WR</div>
+        <h1 class="splash-brand">WORKRANK</h1>
+        <p class="splash-tagline">Work. Share. Improve.</p>
+        <div class="loader"></div>
+      </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="screen-login" class="screen">
+      <div class="login-header">
+        <div class="splash-logo small">WR</div>
+        <h1 class="splash-brand small">WORKRANK</h1>
+      </div>
+      <div class="login-form">
+        <label>Telefon raqam</label>
+        <input type="tel" id="login-phone" value="998901234567" />
+        <label>Parol</label>
+        <input type="password" id="login-password" value="123456" />
+        <button class="btn-primary" onclick="doLogin()">Kirish</button>
+        <a class="link">Parolni unutdingizmi?</a>
+      </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="screen-app" class="screen">
+      <!-- HOME -->
+      <div id="tab-home" class="tab-content active">
+        <header class="app-header">
+          <button class="icon-btn">☰</button>
+          <span class="header-title">WORKRANK</span>
+          <button class="icon-btn notif-btn" onclick="showScreen('notifications')">
+            🔔<span class="badge">2</span>
+          </button>
+        </header>
+        <div class="story-bar" id="story-bar"></div>
+        <div class="feed" id="feed"></div>
+      </div>
+
+      <!-- STORY LIST -->
+      <div id="tab-story" class="tab-content">
+        <div class="page-header">
+          <h2>Bugungi Storylar</h2>
+          <p>24 soat ichida avtomatik yo'qoladi</p>
+        </div>
+        <div id="story-list"></div>
+      </div>
+
+      <!-- UPLOAD -->
+      <div id="tab-upload" class="tab-content">
+        <div class="page-header"><h2>Yangi ish yuklash</h2></div>
+        <div class="upload-area">
+          <div class="upload-box" id="upload-preview">
+            <span class="upload-icon">☁️</span>
+            <p>Rasm yuklash</p>
+          </div>
+          <div class="media-btns">
+            <button class="media-btn" onclick="pickImage()">📷 Kamera</button>
+            <button class="media-btn" onclick="pickImage()">🖼️ Galereya</button>
+          </div>
+          <input type="file" id="file-input" accept="image/*" hidden onchange="handleFile(this)" />
+          <label>Ish nomi</label>
+          <input type="text" id="upload-title" placeholder="Masalan: 3-qavat elektr montaji" />
+          <label>Ish tavsifi</label>
+          <textarea id="upload-desc" placeholder="Qisqa tavsif yozing..." rows="3"></textarea>
+          <button class="btn-primary" onclick="submitPost()">Yuklash</button>
+        </div>
+      </div>
+
+      <!-- RATING -->
+      <div id="tab-rating" class="tab-content">
+        <div class="page-header"><h2>Top 10 Xodim</h2></div>
+        <div class="tabs" id="rating-tabs">
+          <button class="tab active" data-period="daily">Kunlik</button>
+          <button class="tab" data-period="weekly">Haftalik</button>
+          <button class="tab" data-period="monthly">Oylik</button>
+        </div>
+        <div id="rating-list"></div>
+      </div>
+
+      <!-- PROFILE -->
+      <div id="tab-profile" class="tab-content">
+        <div class="profile-header">
+          <img src="https://i.pravatar.cc/150?u=azizbek" class="profile-avatar" alt="" />
+          <h2>Azizbek</h2>
+          <p class="position">Elektr montajchi</p>
+          <p class="dept">Montaj bo'limi</p>
+        </div>
+        <div class="card attendance-card">
+          <h3>Davomat</h3>
+          <div class="attendance-row">
+            <div><span>🟢 Kelgan</span><strong id="check-in">08:12</strong></div>
+            <div class="divider"></div>
+            <div><span>🔴 Ketgan</span><strong>18:00</strong></div>
+          </div>
+          <button class="btn-primary" onclick="doCheckIn()">📱 QR Davomat</button>
+        </div>
+        <h3 class="section-title">Statistika</h3>
+        <div class="stats-grid">
+          <div class="stat-card"><span>👍</span><strong>245</strong><small>Like</small></div>
+          <div class="stat-card"><span>👎</span><strong>12</strong><small>Dislike</small></div>
+          <div class="stat-card"><span>💼</span><strong>85</strong><small>Ishlar</small></div>
+          <div class="stat-card"><span>🏆</span><strong>1200</strong><small>Ball</small></div>
+        </div>
+        <button class="btn-outline">📊 Statistika</button>
+        <button class="btn-logout" onclick="doLogout()">Chiqish</button>
+      </div>
+
+      <!-- NOTIFICATIONS -->
+      <div id="screen-notifications" class="overlay-screen">
+        <header class="sub-header">
+          <button onclick="hideNotifications()">←</button>
+          <span>Bildirishnomalar</span>
+          <span></span>
+        </header>
+        <div id="notif-list"></div>
+      </div>
+
+      <!-- STORY VIEWER -->
+      <div id="screen-story-viewer" class="overlay-screen story-viewer">
+        <div class="story-progress" id="story-progress"></div>
+        <div class="story-top">
+          <img id="sv-avatar" src="" alt="" />
+          <span id="sv-name"></span>
+          <button onclick="closeStoryViewer()">✕</button>
+        </div>
+        <img id="sv-image" class="story-bg" src="" alt="" />
+        <div class="story-bottom">
+          <h2 id="sv-title"></h2>
+          <div class="story-stats">
+            <div><small>Kunlik ball</small><strong id="sv-points">0</strong></div>
+            <div><small>Like</small><strong id="sv-likes">0</strong></div>
+            <div><small>Dislike</small><strong id="sv-dislikes">0</strong></div>
+          </div>
+        </div>
+        <div class="story-tap-left" onclick="prevStory()"></div>
+        <div class="story-tap-right" onclick="nextStory()"></div>
+      </div>
+
+      <!-- DISLIKE MODAL -->
+      <div id="dislike-modal" class="modal">
+        <div class="modal-content">
+          <h3>Kamchilik haqida ma'lumot</h3>
+          <label>Kamchilik turi</label>
+          <div class="chips" id="dislike-chips"></div>
+          <label>Izoh yozing...</label>
+          <textarea id="dislike-comment" rows="4" placeholder="Kamchilik tavsifini yozing..."></textarea>
+          <button class="btn-primary" onclick="saveDislike()">Saqlash</button>
+          <button class="btn-cancel" onclick="closeDislike()">Bekor qilish</button>
+        </div>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <button class="nav-item active" data-tab="home" onclick="switchTab('home')">
+          <span>🏠</span><small>Home</small>
+        </button>
+        <button class="nav-item" data-tab="story" onclick="switchTab('story')">
+          <span>📖</span><small>Story</small>
+        </button>
+        <button class="nav-item upload-nav" data-tab="upload" onclick="switchTab('upload')">
+          <span>➕</span><small>Upload</small>
+        </button>
+        <button class="nav-item" data-tab="rating" onclick="switchTab('rating')">
+          <span>🏆</span><small>Rating</small>
+        </button>
+        <button class="nav-item" data-tab="profile" onclick="switchTab('profile')">
+          <span>👤</span><small>Profile</small>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

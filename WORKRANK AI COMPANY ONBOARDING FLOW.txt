@@ -1,0 +1,388 @@
+WORKRANK AI COMPANY ONBOARDING FLOW
+
+==================================================
+MAQSAD
+======
+
+Yangi korxona WorkRank tizimiga qo'shilganda,
+rahbar murakkab sozlamalar qilmasligi kerak.
+
+AI yordamchi 5-10 ta savol berib,
+korxonaning virtual muhitini avtomatik yaratadi.
+
+Natijada:
+
+* Korxona yaratiladi
+* Bo'limlar yaratiladi
+* QR kod yaratiladi
+* Ish boshqaruvchilar yaratiladi
+* Xodimlar qo'shiladi
+* Reyting tizimi ishga tushadi
+
+==================================================
+1-QADAM
+RAHBAR RO'YXATDAN O'TADI
+========================
+
+Rahbar ilovani yuklab oladi.
+
+Kiritadi:
+
+* Ism Familiya
+* Telefon raqam
+* Parol
+
+Tizim:
+
+Manager Account yaratadi.
+
+==================================================
+2-QADAM
+AI ONBOARDING BOSHLANADI
+========================
+
+AI:
+
+Assalomu alaykum.
+
+Korxonangizni 2 daqiqada yaratishga yordam beraman.
+
+Boshlaymizmi?
+
+[HA]
+
+==================================================
+3-QADAM
+KORXONA NOMI
+============
+
+AI:
+
+Korxona nomini kiriting.
+
+Rahbar:
+
+Smart Electric Service
+
+Tizim:
+
+company.name yaratadi.
+
+==================================================
+4-QADAM
+KORXONA FAOLIYATI
+=================
+
+AI:
+
+Korxonangiz qaysi sohada ishlaydi?
+
+Variantlar:
+
+* Qurilish
+* Elektr Montaj
+* Zavod
+* Servis Markaz
+* Avtoservis
+* Omborxona
+* Restoran
+* Boshqa
+
+Rahbar:
+
+Elektr Montaj
+
+Tizim:
+
+company.type saqlaydi.
+
+==================================================
+5-QADAM
+ISH BOSHQARUVCHILAR SONI
+========================
+
+AI:
+
+Nechta ish boshqaruvchi mavjud?
+
+Rahbar:
+
+3
+
+Tizim:
+
+3 ta Manager Slot yaratadi.
+
+==================================================
+6-QADAM
+XODIMLAR SONI
+=============
+
+AI:
+
+Taxminiy nechta xodim ishlaydi?
+
+Rahbar:
+
+45
+
+Tizim:
+
+employee_limit = 45
+
+==================================================
+7-QADAM
+BO'LIMLAR
+=========
+
+AI:
+
+Korxonangizda qanday bo'limlar mavjud?
+
+Rahbar:
+
+* Montaj
+* Diagnostika
+* Ombor
+
+Tizim:
+
+Departments yaratadi.
+
+1. Montaj
+2. Diagnostika
+3. Ombor
+
+==================================================
+8-QADAM
+ISH VAQTI
+=========
+
+AI:
+
+Ish vaqti nechidan nechigacha?
+
+Rahbar:
+
+08:00 - 18:00
+
+Tizim:
+
+Attendance Settings yaratadi.
+
+==================================================
+9-QADAM
+QR TIZIMI
+=========
+
+AI:
+
+Davomat QR orqali yuritilsinmi?
+
+Rahbar:
+
+Ha
+
+Tizim:
+
+Unique Company QR yaratadi.
+
+Misol:
+
+WRK-SMART-2026-001
+
+==================================================
+10-QADAM
+REYTING TIZIMI
+==============
+
+AI:
+
+Xodimlarni qanday baholamoqchisiz?
+
+Variantlar:
+
+1. Like / Dislike
+2. Ball tizimi
+3. Like + Ball
+
+Rahbar:
+
+Like / Dislike
+
+Tizim:
+
+Rating Settings yaratadi.
+
+==================================================
+11-QADAM
+XODIMLARNI QO'SHISH
+===================
+
+AI:
+
+Xodimlarni qanday qo'shmoqchisiz?
+
+Variantlar:
+
+1. QR Taklif
+2. Taklif Kodi
+3. Excel Import
+
+Rahbar:
+
+Excel Import
+
+==================================================
+12-QADAM
+EXCEL IMPORT
+============
+
+Rahbar Excel yuklaydi.
+
+Misol:
+
+Ism
+Telefon
+
+Ali
+998901111111
+
+Vali
+998902222222
+
+Tizim:
+
+Avtomatik:
+
+* Account yaratadi
+* Login yaratadi
+* Parol yaratadi
+
+==================================================
+13-QADAM
+VIRTUAL KORXONA YARATISH
+========================
+
+AI quyidagilarni yaratadi:
+
+Company
+
+Smart Electric Service
+
+Departments
+
+* Montaj
+* Diagnostika
+* Ombor
+
+Managers
+
+* Manager 1
+* Manager 2
+* Manager 3
+
+Employees
+
+* Excel orqali yuklanganlar
+
+QR Attendance
+
+* Tayyor
+
+Feed
+
+* Tayyor
+
+Story
+
+* Tayyor
+
+Ratings
+
+* Tayyor
+
+Announcements
+
+* Tayyor
+
+==================================================
+14-QADAM
+KORXONA DASHBOARD
+=================
+
+Rahbar quyidagilarni ko'radi:
+
+Bugungi davomat
+
+Nechta xodim kelgan
+
+Eng faol xodim
+
+Eng sifatli xodim
+
+Like statistikasi
+
+Dislike statistikasi
+
+Bo'limlar statistikasi
+
+==================================================
+15-QADAM
+XODIM QO'SHISHNING KEYINGI USULLARI
+===================================
+
+Istalgan vaqtda:
+
+1. QR Taklif
+
+Tizim QR yaratadi
+
+Xodim skaner qiladi
+
+Avtomatik qo'shiladi
+
+---
+
+2. Taklif Kodi
+
+Misol:
+
+SMART2026
+
+Kod orqali kiradi
+
+---
+
+3. Admin Qo'shishi
+
+Rahbar:
+
+Ism
+Telefon
+
+kiritadi
+
+Tizim account yaratadi
+
+==================================================
+YAKUNIY NATIJA
+==============
+
+Rahbar:
+
+2-3 daqiqa ichida
+
+to'liq virtual korxona yaratadi.
+
+AI avtomatik:
+
+* Kompaniya yaratadi
+* Bo'limlarni yaratadi
+* QR yaratadi
+* Managerlarni yaratadi
+* Reyting tizimini sozlaydi
+* Xodimlarni qo'shadi
+* Dashboardni ishga tushiradi
+
+va korxona darhol ishlashni boshlaydi.

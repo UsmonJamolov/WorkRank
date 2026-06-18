@@ -1,0 +1,307 @@
+WORKRANK
+(Xodimlar Davomati, Sifat Nazorati va Motivatsiya Platformasi)
+
+==================================================
+
+1. LOYIHA MAQSADI
+   ==================================================
+
+Korxona xodimlarining:
+
+* Davomatini nazorat qilish
+* Bajarilgan ishlarni hujjatlashtirish
+* Xodimlar orasida sog'lom raqobat yaratish
+* Ish sifatini oshirish
+* KPI va reyting tizimini yuritish
+
+uchun mobil ilova yaratish.
+
+==================================================
+2. FOYDALANUVCHI ROLLARI
+========================
+
+1. Xodim
+2. Rahbar
+3. Administrator
+
+==================================================
+3. ASOSIY FUNKSIYALAR
+=====================
+
+3.1 DAVOMAT TIZIMI
+
+* Ishxonaga kirishda QR Code skanerlash
+* Kelgan vaqtni yozish
+* Profilga saqlash
+* Kunlik davomat statistikasi
+
+Ma'lumotlar:
+
+* Kelgan vaqt
+* Ketgan vaqt
+* Ish kuni davomiyligi
+
+---
+
+3.2 ISH HISOBOTI
+
+Xodim:
+
+* Rasm yuklaydi
+* Ish nomini yozadi
+* Qisqa tavsif qo'shadi
+
+Misol:
+
+"3-qavat elektr montaji yakunlandi"
+
+Post umumiy lentada ko'rinadi.
+
+---
+
+3.3 LIKE / DISLIKE TIZIMI
+
+LIKE
+
+* Izoh majburiy emas
+
+DISLIKE
+
+* Izoh majburiy
+* Kamchilik turi tanlanadi
+
+Kamchilik turlari:
+
+1. Sifat xatosi
+2. Xavfsizlik xatosi
+3. Tugallanmagan ish
+4. Noto'g'ri material ishlatilgan
+5. Boshqa
+
+Misol:
+
+Kamchilik turi:
+Sifat xatosi
+
+Izoh:
+"Kabel kanali to'g'ri mahkamlanmagan"
+
+---
+
+3.4 BAHOLASH QOIDALARI
+
+* Bir xodim bitta postga faqat bir marta ovoz beradi
+* Kim dislike bergani ko'rinadi
+* Dislike izohi saqlanadi
+* Like/dislike statistikasi yuritiladi
+
+---
+
+3.5 REYTING TIZIMI
+
+Har bir xodim uchun:
+
+Faollik reytingi
+
+* Nechta ish yuklagani
+
+Sifat reytingi
+
+* Like/dislike nisbati
+
+Jamoa reytingi
+
+* Foydali fikrlari soni
+
+Umumiy reyting
+
+* Oylik TOP xodimlar
+
+---
+
+3.6 ISTORIYA TIZIMI
+
+Instagram Story uslubida
+
+Ko'rsatadi:
+
+* Bugungi ishlar
+* Kunlik ballar
+* Faollik
+
+24 soatdan keyin avtomatik yo'qoladi.
+
+---
+
+3.7 E'LONLAR
+
+Rahbar:
+
+* Ertangi ishchilar ro'yxati
+* Topshiriqlar
+* Muhim e'lonlar
+
+joylashtiradi.
+
+==================================================
+4. ANALITIKA PANELI
+===================
+
+Rahbar uchun Dashboard
+
+Ko'rsatadi:
+
+* Eng faol xodim
+* Eng sifatli xodim
+* Eng kam xato qilgan xodim
+* Eng ko'p xato turi
+* Bo'limlar statistikasi
+* Oylik reyting
+
+==================================================
+5. MUKOFOT TIZIMI
+=================
+
+Oy yakunida:
+
+1. Eng faol xodim
+2. Eng sifatli ish egasi
+3. Eng kam xato qilgan xodim
+4. Eng foydali baholovchi
+
+Mukofotlar:
+
+* Pul
+* Sovg'a
+* Faxriy yorliq
+
+==================================================
+6. MOBIL ILOVA DIZAYNI
+======================
+
+BOTTOM NAVIGATION
+
+[Home]
+[Story]
+[Upload]
+[Rating]
+[Profile]
+
+---
+
+HOME
+
+Instagram Feed ko'rinishi
+
+Kartochka:
+
+* Rasm
+* Xodim ismi
+* Ish nomi
+* Tavsif
+* 👍 Like
+* 👎 Dislike
+* Comment
+
+---
+
+STORY
+
+Instagram Story uslubida
+
+Bugungi:
+
+* Ishlar
+* Ballar
+* Natijalar
+
+---
+
+UPLOAD
+
+* Rasm tanlash
+* Ish nomi
+* Tavsif
+* Yuborish
+
+---
+
+RATING
+
+TOP 10
+
+* Kunlik
+* Haftalik
+* Oylik
+
+---
+
+PROFILE
+
+* Profil rasmi
+* Lavozim
+* Davomat
+* Ballar
+* Like soni
+* Dislike soni
+* Reyting
+
+==================================================
+7. TEXNIK QISM
+==============
+
+Frontend:
+Flutter
+
+Backend:
+Laravel yoki Node.js
+
+Database:
+PostgreSQL
+
+Storage:
+AWS S3 yoki Cloud Storage
+
+Authentication:
+JWT
+
+Push Notification:
+Firebase
+
+==================================================
+8. MVP (1-VERSIYA)
+==================
+
+1. Login
+2. QR Attendance
+3. Feed
+4. Post Upload
+5. Like
+6. Dislike + Izoh
+7. Reyting
+8. Profil
+
+==================================================
+9. KEYINGI BOSQICH
+==================
+
+1. GPS nazorati
+2. AI rasm tahlili
+3. KPI avtomatik hisoblash
+4. Oylik PDF hisobot
+5. Premium korporativ versiya
+
+==================================================
+TAXMINI BOZOR BAHOSI
+====================
+
+Startup Potensiali:
+8.5 / 10
+
+Asosiy Mijozlar:
+
+* Qurilish kompaniyalari
+* Ishlab chiqarish sexlari
+* Servis markazlari
+* Montaj brigadalari
+* Kichik va o'rta bizneslar

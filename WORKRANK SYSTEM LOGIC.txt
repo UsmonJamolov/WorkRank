@@ -1,0 +1,531 @@
+WORKRANK SYSTEM LOGIC
+
+TECH STACK
+
+Frontend:
+
+* React Native
+* TypeScript
+* React Navigation
+* Redux Toolkit
+
+Backend:
+
+* Node.js
+* Express.js
+
+Database:
+
+* MongoDB
+
+Authentication:
+
+* JWT
+* Refresh Token
+
+Storage:
+
+* AWS S3
+
+Push Notification:
+
+* Firebase Cloud Messaging (FCM)
+
+QR:
+
+* react-native-camera
+* react-native-qrcode-svg
+
+==================================================
+SYSTEM FLOW
+===========
+
+1. USER LOGIN
+
+Employee opens application
+
+↓
+
+Enter phone number
+
+↓
+
+Enter password
+
+↓
+
+POST /auth/login
+
+↓
+
+JWT Access Token
+
+↓
+
+Refresh Token
+
+↓
+
+Home Screen
+
+==================================================
+2. QR ATTENDANCE FLOW
+=====================
+
+Employee arrives at workplace
+
+↓
+
+Open QR Scanner
+
+↓
+
+Scan company QR
+
+↓
+
+POST /attendance/checkin
+
+↓
+
+System stores:
+
+employeeId
+date
+checkInTime
+
+↓
+
+Notification
+
+"Attendance successfully recorded"
+
+==================================================
+3. CREATE WORK POST
+===================
+
+Employee finishes work
+
+↓
+
+Open Upload Screen
+
+↓
+
+Take photo
+
+↓
+
+Enter title
+
+↓
+
+Enter description
+
+↓
+
+Upload image to AWS S3
+
+↓
+
+POST /posts/create
+
+↓
+
+Save Post
+
+↓
+
+Publish to Feed
+
+==================================================
+4. FEED FLOW
+============
+
+User opens Home
+
+↓
+
+GET /posts/feed
+
+↓
+
+Latest posts
+
+↓
+
+Display Feed
+
+↓
+
+User can:
+
+Like
+Dislike
+Comment
+
+==================================================
+5. LIKE FLOW
+============
+
+User clicks Like
+
+↓
+
+POST /posts/:id/like
+
+↓
+
+Save Reaction
+
+↓
+
+Update Statistics
+
+↓
+
+Realtime Update
+
+==================================================
+6. DISLIKE FLOW
+===============
+
+User clicks Dislike
+
+↓
+
+Select Error Category
+
+* Quality Error
+* Safety Error
+* Incomplete Work
+* Wrong Material
+* Other
+
+↓
+
+Write Comment
+
+↓
+
+POST /posts/:id/dislike
+
+↓
+
+Save Dislike
+
+↓
+
+Update Statistics
+
+↓
+
+Notify Post Owner
+
+==================================================
+7. COMMENT FLOW
+===============
+
+User writes comment
+
+↓
+
+POST /posts/:id/comment
+
+↓
+
+Save Comment
+
+↓
+
+Send Notification
+
+==================================================
+8. STORY FLOW
+=============
+
+Post uploaded
+
+↓
+
+Automatically create Story
+
+↓
+
+Visible for 24 hours
+
+↓
+
+Auto Delete
+
+==================================================
+9. RATING SYSTEM
+================
+
+Each Post:
+
+Like = +1 Point
+
+Dislike = -1 Point
+
+Quality Score Formula:
+
+Likes / (Likes + Dislikes)
+
+Employee Score:
+
+Attendance Score
+
+*
+
+Activity Score
+
+*
+
+Quality Score
+
+=
+
+Total Rating
+
+==================================================
+10. MONTHLY WINNER
+==================
+
+Cron Job
+
+Runs monthly
+
+↓
+
+Calculate Rankings
+
+↓
+
+Top Active Employee
+
+↓
+
+Top Quality Employee
+
+↓
+
+Top Reviewer
+
+↓
+
+Save Award
+
+==================================================
+11. NOTIFICATION FLOW
+=====================
+
+Firebase FCM
+
+Triggers:
+
+New Post
+
+New Comment
+
+New Dislike
+
+Manager Announcement
+
+Monthly Award
+
+==================================================
+DATABASE COLLECTIONS
+====================
+
+users
+
+{
+_id,
+fullName,
+phone,
+role,
+department,
+avatar,
+createdAt
+}
+
+---
+
+attendance
+
+{
+_id,
+employeeId,
+checkIn,
+checkOut,
+date
+}
+
+---
+
+posts
+
+{
+_id,
+employeeId,
+imageUrl,
+title,
+description,
+likesCount,
+dislikesCount,
+commentsCount,
+createdAt
+}
+
+---
+
+dislikes
+
+{
+_id,
+postId,
+employeeId,
+category,
+comment,
+createdAt
+}
+
+---
+
+likes
+
+{
+_id,
+postId,
+employeeId,
+createdAt
+}
+
+---
+
+comments
+
+{
+_id,
+postId,
+employeeId,
+text,
+createdAt
+}
+
+---
+
+stories
+
+{
+_id,
+employeeId,
+postId,
+expiresAt
+}
+
+---
+
+notifications
+
+{
+_id,
+userId,
+title,
+body,
+read
+}
+
+---
+
+awards
+
+{
+_id,
+employeeId,
+month,
+type
+}
+
+==================================================
+REACT NATIVE SCREEN STRUCTURE
+=============================
+
+Auth Stack
+
+LoginScreen
+
+---
+
+Main Stack
+
+HomeScreen
+
+StoryScreen
+
+UploadScreen
+
+RatingScreen
+
+ProfileScreen
+
+---
+
+Additional
+
+NotificationScreen
+
+CommentScreen
+
+PostDetailScreen
+
+AnnouncementScreen
+
+SettingsScreen
+
+==================================================
+FOLDER STRUCTURE
+================
+
+src
+
+├── screens
+├── navigation
+├── components
+├── services
+├── redux
+├── hooks
+├── utils
+├── constants
+├── assets
+
+backend
+
+├── routes
+├── controllers
+├── models
+├── middleware
+├── services
+├── config
+├── utils
+
+==================================================
+FUTURE FEATURES
+===============
+
+1. GPS Validation
+
+2. AI Image Analysis
+
+3. Face Recognition Attendance
+
+4. PDF Monthly Reports
+
+5. Admin Web Dashboard
+
+6. Company KPI Analytics
+
+7. Multi Company Support
+
+8. Subscription System

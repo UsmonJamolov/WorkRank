@@ -1,0 +1,227 @@
+import { Comment, Notification, Post, RatingEntry, Story, User } from '../types';
+
+export const CURRENT_USER: User = {
+  id: '1',
+  fullName: 'Azizbek',
+  phone: '998901234567',
+  role: 'employee',
+  department: 'Montaj',
+  position: 'Elektr montajchi',
+  avatar: 'https://i.pravatar.cc/150?u=azizbek',
+  points: 1200,
+  likes: 245,
+  dislikes: 12,
+  postsCount: 85,
+  checkIn: '08:12',
+  checkOut: '18:00',
+};
+
+export const DEMO_USERS: User[] = [
+  CURRENT_USER,
+  {
+    id: '2',
+    fullName: 'Bekzod',
+    phone: '998902222222',
+    role: 'employee',
+    department: 'Montaj',
+    position: 'Elektr montajchi',
+    avatar: 'https://i.pravatar.cc/150?u=bekzod',
+    points: 980,
+    likes: 210,
+    dislikes: 8,
+    postsCount: 72,
+    checkIn: '08:05',
+    checkOut: '17:55',
+  },
+  {
+    id: '3',
+    fullName: 'Jamshid',
+    phone: '998903333333',
+    role: 'employee',
+    department: 'Diagnostika',
+    position: 'Diagnost',
+    avatar: 'https://i.pravatar.cc/150?u=jamshid',
+    points: 870,
+    likes: 180,
+    dislikes: 15,
+    postsCount: 65,
+    checkIn: '08:20',
+    checkOut: '18:10',
+  },
+  {
+    id: '4',
+    fullName: 'Aziz',
+    phone: '998904444444',
+    role: 'employee',
+    department: 'Ombor',
+    position: 'Omborchi',
+    avatar: 'https://i.pravatar.cc/150?u=aziz',
+    points: 760,
+    likes: 150,
+    dislikes: 20,
+    postsCount: 55,
+    checkIn: '08:00',
+    checkOut: '17:30',
+  },
+];
+
+export const DEMO_POSTS: Post[] = [
+  {
+    id: '1',
+    employeeId: '1',
+    employeeName: 'Azizbek',
+    employeeAvatar: 'https://i.pravatar.cc/150?u=azizbek',
+    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800',
+    title: '3-qavat elektr montaji yakunlandi',
+    description: 'Barcha kabel kanallari o\'rnatildi va tekshiruvdan o\'tkazildi.',
+    likesCount: 15,
+    dislikesCount: 2,
+    commentsCount: 7,
+    createdAt: '2026-06-16T08:35:00',
+  },
+  {
+    id: '2',
+    employeeId: '2',
+    employeeName: 'Bekzod',
+    employeeAvatar: 'https://i.pravatar.cc/150?u=bekzod',
+    imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800',
+    title: 'Material qabul qilish yakunlandi',
+    description: 'Yangi kabel va avtomatlar omborga qabul qilindi.',
+    likesCount: 22,
+    dislikesCount: 0,
+    commentsCount: 4,
+    createdAt: '2026-06-16T10:15:00',
+  },
+  {
+    id: '3',
+    employeeId: '3',
+    employeeName: 'Jamshid',
+    employeeAvatar: 'https://i.pravatar.cc/150?u=jamshid',
+    imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800',
+    title: 'Diagnostika tekshiruvi',
+    description: '2-qavat elektr tarmog\'i to\'liq diagnostika qilindi.',
+    likesCount: 18,
+    dislikesCount: 1,
+    commentsCount: 5,
+    createdAt: '2026-06-16T14:00:00',
+  },
+];
+
+export const DEMO_STORIES: Story[] = [
+  {
+    id: 's1',
+    employeeId: '1',
+    employeeName: 'Aziz',
+    avatar: 'https://i.pravatar.cc/150?u=aziz',
+    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800',
+    title: 'Elektr montaj',
+    dailyPoints: 45,
+    likesCount: 12,
+    dislikesCount: 1,
+    viewed: false,
+  },
+  {
+    id: 's2',
+    employeeId: '2',
+    employeeName: 'Bekzod',
+    avatar: 'https://i.pravatar.cc/150?u=bekzod',
+    imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800',
+    title: 'Material qabul',
+    dailyPoints: 38,
+    likesCount: 20,
+    dislikesCount: 0,
+    viewed: false,
+  },
+  {
+    id: 's3',
+    employeeId: '3',
+    employeeName: 'Jamshid',
+    avatar: 'https://i.pravatar.cc/150?u=jamshid',
+    imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800',
+    title: 'Diagnostika',
+    dailyPoints: 32,
+    likesCount: 15,
+    dislikesCount: 2,
+    viewed: true,
+  },
+];
+
+export const DEMO_COMMENTS: Comment[] = [
+  {
+    id: 'c1',
+    postId: '1',
+    employeeId: '2',
+    employeeName: 'Bekzod',
+    text: 'Juda yaxshi ish! 👍',
+    createdAt: '2026-06-16T09:00:00',
+  },
+  {
+    id: 'c2',
+    postId: '1',
+    employeeId: '3',
+    employeeName: 'Jamshid',
+    text: 'Tekshiruvdan ham o\'tdi.',
+    createdAt: '2026-06-16T09:30:00',
+  },
+];
+
+export const DEMO_NOTIFICATIONS: Notification[] = [
+  {
+    id: 'n1',
+    title: 'Aziz yangi ish yukladi',
+    body: '3-qavat elektr montaji yakunlandi',
+    read: false,
+    createdAt: '2026-06-16T08:35:00',
+  },
+  {
+    id: 'n2',
+    title: 'Bekzod kamchilik qoldirdi',
+    body: 'Sifat xatosi: Kabel kanali to\'g\'ri mahkamlanmagan',
+    read: false,
+    createdAt: '2026-06-16T10:00:00',
+  },
+  {
+    id: 'n3',
+    title: 'Siz TOP 3 ga kirdingiz!',
+    body: 'Tabriklaymiz! Oylik reytingda 3-o\'rin.',
+    read: true,
+    createdAt: '2026-06-15T18:00:00',
+  },
+  {
+    id: 'n4',
+    title: 'Rahbar yangi e\'lon joylashtirdi',
+    body: 'Ertangi ish rejasi e\'lon qilindi.',
+    read: true,
+    createdAt: '2026-06-15T17:00:00',
+  },
+];
+
+export const DEMO_RATINGS: Record<'daily' | 'weekly' | 'monthly', RatingEntry[]> = {
+  daily: [
+    { rank: 1, user: DEMO_USERS[0], points: 240, period: 'daily' },
+    { rank: 2, user: DEMO_USERS[1], points: 220, period: 'daily' },
+    { rank: 3, user: DEMO_USERS[2], points: 210, period: 'daily' },
+    { rank: 4, user: DEMO_USERS[3], points: 195, period: 'daily' },
+  ],
+  weekly: [
+    { rank: 1, user: DEMO_USERS[1], points: 980, period: 'weekly' },
+    { rank: 2, user: DEMO_USERS[0], points: 920, period: 'weekly' },
+    { rank: 3, user: DEMO_USERS[2], points: 850, period: 'weekly' },
+    { rank: 4, user: DEMO_USERS[3], points: 720, period: 'weekly' },
+  ],
+  monthly: [
+    { rank: 1, user: DEMO_USERS[0], points: 1200, period: 'monthly' },
+    { rank: 2, user: DEMO_USERS[1], points: 980, period: 'monthly' },
+    { rank: 3, user: DEMO_USERS[2], points: 870, period: 'monthly' },
+    { rank: 4, user: DEMO_USERS[3], points: 760, period: 'monthly' },
+  ],
+};
+
+export const DEMO_ANNOUNCEMENT = {
+  title: 'ERTANGI ISH REJASI',
+  items: [
+    '08:00 - Elektr montaj',
+    '10:00 - Material qabul qilish',
+    '14:00 - Tekshiruv',
+  ],
+};

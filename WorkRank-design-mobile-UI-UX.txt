@@ -1,0 +1,396 @@
+WORKRANK MOBILE APP UI/UX DESIGN
+
+==================================================
+DIZAYN KONSEPSIYASI
+===================
+
+Uslub:
+
+* Professional
+* Zamonaviy
+* Minimalistik
+* Instagram Feed + KPI Dashboard
+
+Ranglar:
+
+Primary:
+#2563EB (Ko'k)
+
+Success:
+#22C55E (Yashil)
+
+Warning:
+#F59E0B (Sariq)
+
+Danger:
+#EF4444 (Qizil)
+
+Background:
+#F8FAFC
+
+Card:
+#FFFFFF
+
+Text:
+#111827
+
+==================================================
+
+1. SPLASH SCREEN
+   ==================================================
+
+Markazda:
+
+WORKRANK LOGO
+
+Tagline:
+
+"Work. Share. Improve."
+
+Pastda:
+
+Loading Animation
+
+==================================================
+2. LOGIN SCREEN
+===============
+
+Logo
+
+WORKRANK
+
+Input:
+
+Telefon raqam
+
+Parol
+
+Button:
+
+[Kirish]
+
+Link:
+
+Parolni unutdingizmi?
+
+==================================================
+3. HOME SCREEN
+==============
+
+Yuqori qism:
+
+☰ Menu
+
+WORKRANK
+
+🔔 Notification
+
+---
+
+Story qismi
+
+○ Aziz
+○ Bekzod
+○ Jamshid
+○ +20
+
+---
+
+POST FEED
+
+Kartochka:
+
+[Xodim rasmi] Azizbek
+
+08:35
+
+"3-qavat elektr montaji yakunlandi"
+
+[ISH RASMI]
+
+Like: 15
+
+Dislike: 2
+
+Comment: 7
+
+Buttons:
+
+👍 Tasdiqlayman
+
+👎 Kamchilik topdim
+
+💬 Izohlar
+
+==================================================
+4. DISLIKE OYNASI
+=================
+
+Sarlavha:
+
+Kamchilik haqida ma'lumot
+
+Dropdown:
+
+* Sifat xatosi
+* Xavfsizlik xatosi
+* Tugallanmagan ish
+* Noto'g'ri material
+* Boshqa
+
+Text Area:
+
+Izoh yozing...
+
+Button:
+
+[Saqlash]
+
+==================================================
+5. STORY SCREEN
+===============
+
+Instagram Story uslubida
+
+Ko'rsatadi:
+
+Rasm
+
+Ish nomi
+
+Kunlik ball
+
+Like soni
+
+Dislike soni
+
+Swipe:
+
+Keyingi story
+
+==================================================
+6. UPLOAD SCREEN
+================
+
+Sarlavha:
+
+Yangi ish yuklash
+
+---
+
+Rasm yuklash
+
+[Kamera]
+[Galereya]
+
+---
+
+Input:
+
+Ish nomi
+
+Textarea:
+
+Ish tavsifi
+
+---
+
+Button:
+
+[Yuklash]
+
+==================================================
+7. RATING SCREEN
+================
+
+Top 10 Xodim
+
+Tabs:
+
+Kunlik
+
+Haftalik
+
+Oylik
+
+---
+
+#1 Azizbek
+
+Ball: 240
+
+#2 Bekzod
+
+Ball: 220
+
+#3 Jamshid
+
+Ball: 210
+
+==================================================
+8. PROFILE SCREEN
+=================
+
+Profil rasmi
+
+Azizbek
+
+Elektr montajchi
+
+---
+
+Davomat
+
+Kelgan:
+08:12
+
+Ketgan:
+18:00
+
+---
+
+Statistika
+
+Like:
+245
+
+Dislike:
+12
+
+Ishlar:
+85
+
+Ball:
+1200
+
+---
+
+Button:
+
+[Statistika]
+
+==================================================
+9. ANALYTICS DASHBOARD
+======================
+
+Faqat rahbar uchun
+
+---
+
+Bugungi davomat
+
+45 / 50
+
+---
+
+Eng faol xodim
+
+Azizbek
+
+---
+
+Eng sifatli xodim
+
+Bekzod
+
+---
+
+Xato turlari
+
+Sifat xatosi: 32%
+
+Xavfsizlik: 20%
+
+Tugallanmagan: 18%
+
+Material: 10%
+
+Boshqa: 20%
+
+---
+
+Haftalik grafik
+
+Postlar soni
+
+Like soni
+
+Dislike soni
+
+==================================================
+10. NOTIFICATION SCREEN
+=======================
+
+🔔 Aziz yangi ish yukladi
+
+🔔 Bekzod kamchilik qoldirdi
+
+🔔 Siz TOP 3 ga kirdingiz
+
+🔔 Rahbar yangi e'lon joylashtirdi
+
+==================================================
+11. E'LONLAR SCREEN
+===================
+
+Rahbar postlari
+
+Kartochka:
+
+ERTANGI ISH REJASI
+
+08:00 - Elektr montaj
+
+10:00 - Material qabul qilish
+
+14:00 - Tekshiruv
+
+==================================================
+BOTTOM NAVIGATION
+=================
+
+🏠 Home
+
+📖 Story
+
+➕ Upload
+
+🏆 Rating
+
+👤 Profile
+
+==================================================
+FIGMA FRAME O'LCHAMI
+====================
+
+Mobile:
+
+390 x 844 px
+
+Grid:
+
+4 px
+
+Border Radius:
+
+16 px
+
+Card Radius:
+
+20 px
+
+Shadow:
+
+Soft Shadow
+
+==================================================
+DIZAYN MAQSADI
+==============
+
+Instagram kabi qulay,
+Telegram kabi tez,
+KPI tizimi kabi foydali.
+
+Xodimlar ishlagan ishini ko'rsatadi,
+Rahbar sifatni nazorat qiladi,
+Tizim avtomatik reyting hosil qiladi.
