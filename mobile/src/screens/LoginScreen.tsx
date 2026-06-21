@@ -18,8 +18,8 @@ export default function LoginScreen() {
   const [phone, setPhone] = useState('998901234567');
   const [password, setPassword] = useState('123456');
 
-  const handleLogin = () => {
-    const ok = login(phone, password);
+  const handleLogin = async () => {
+    const ok = await login(phone, password);
     if (!ok) {
       Alert.alert('Xato', 'Telefon raqam yoki parol noto\'g\'ri');
     }

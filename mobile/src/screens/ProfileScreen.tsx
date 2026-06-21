@@ -16,10 +16,18 @@ import { Colors, Radius, Shadow, Spacing } from '../constants/theme';
 import { RootStackParamList } from '../navigation/types';
 
 export default function ProfileScreen() {
-  const { user, logout } = useApp();
+  const { user, logout, attendanceStatus } = useApp();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   if (!user) return null;
+
+  const qrLabel =
+    attendanceStatus === 'working'
+      ? 'QR — Ishdan ketish'
+      : attendanceStatus === 'finished'
+        ? 'Ish kuni yakunlangan'
+        : 'QR — Ishni boshlash';
+  const qrDisabled = attendanceStatus === 'finished';
 
   const stats = [
     { label: 'Like', value: user.likes, icon: 'thumbs-up' as const, color: Colors.success },
@@ -54,11 +62,12 @@ export default function ProfileScreen() {
             </View>
           </View>
           <TouchableOpacity
-            style={styles.qrBtn}
+            style={[styles.qrBtn, qrDisabled && styles.qrBtnDisabled]}
+            disabled={qrDisabled}
             onPress={() => navigation.navigate('QRScanner')}
           >
             <Ionicons name="qr-code" size={20} color="#fff" />
-            <Text style={styles.qrBtnText}>QR Davomat</Text>
+            <Text style={styles.qrBtnText}>{qrLabel}</Text>
           </TouchableOpacity>
         </View>
 
@@ -119,6 +128,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing.md,
   },
   qrBtnText: { color: '#fff', fontWeight: '700', fontSize: 15 },
+  qrBtnDisabled: { opacity: 0.55 },
   sectionTitle: { fontSize: 16, fontWeight: '700', color: Colors.text, marginBottom: Spacing.md },
   statsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.sm, marginBottom: Spacing.lg },
   statCard: {

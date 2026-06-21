@@ -2,14 +2,14 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WorkRank</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div id="phone-frame">
+  <div id="app">
     <!-- SPLASH -->
     <div id="screen-splash" class="screen active">
       <div class="splash-bg">
@@ -33,6 +33,97 @@
         <input type="password" id="login-password" value="123456" />
         <button class="btn-primary" onclick="doLogin()">Kirish</button>
         <a class="link">Parolni unutdingizmi?</a>
+      </div>
+    </div>
+
+    <!-- MORNING QR CHECK-IN (majburiy) -->
+    <div id="screen-checkin" class="screen">
+      <header class="app-header">
+        <button class="icon-btn" disabled style="opacity:0">☰</button>
+        <span class="header-title">WORKRANK</span>
+        <button class="icon-btn" disabled style="opacity:0">🔔</button>
+      </header>
+      <div class="checkin-page">
+        <h2 class="checkin-title" id="checkin-title">Ishga keldingizmi?</h2>
+        <p class="checkin-subtitle" id="checkin-subtitle">QR kodni skaner qiling — ish kuni boshlanadi</p>
+
+        <div class="checkin-scan-card" id="checkin-scan-wrap">
+          <div id="qr-reader" class="qr-reader"></div>
+          <div id="checkin-scan-status" class="checkin-scan-status" hidden>QR qidirilmoqda...</div>
+          <canvas id="qr-canvas" hidden></canvas>
+          <button type="button" id="checkin-scan-btn" class="checkin-scan-prompt" onclick="openQrCamera()" aria-label="QR kod skanerlash">
+            <svg class="checkin-scan-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 10h14v6H16v8H10V10z" fill="currentColor"/>
+              <path d="M48 10h14v14h-6V16H48V10z" fill="currentColor"/>
+              <path d="M10 48v14h14v-6H16V48H10z" fill="currentColor"/>
+              <path d="M52 48h6v6h6v-8H52v2z" fill="currentColor"/>
+              <rect x="22" y="22" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="32" y="22" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="44" y="22" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="22" y="32" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="44" y="32" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="22" y="44" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="32" y="44" width="6" height="6" rx="1" fill="currentColor"/>
+              <path d="M6 36h60" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
+            </svg>
+            <span class="checkin-scan-label">Skaner qilish uchun bosing</span>
+            <span class="checkin-scan-sublabel">Old kamera yoqiladi</span>
+          </button>
+          <div id="checkin-camera-help" class="checkin-camera-help" hidden>
+            <p class="checkin-camera-help-title">Kamera bloklangan</p>
+            <ol class="checkin-camera-help-steps">
+              <li>Manzil satrida <strong>localhost:5500</strong> chap tomonidagi <strong>⚙️ slayder</strong> yoki <strong>🔒 qulf</strong> belgisini bosing</li>
+              <li>Ochilgan oynada <strong>Kamera</strong> qatorini toping</li>
+              <li>Ro‘yxatdan <strong>Ruxsat berish</strong> (Allow) ni tanlang</li>
+              <li>Agar ko‘rinmasa: <strong>Sayt sozlamalari</strong> → <strong>Kamera</strong> → <strong>Ruxsat berish</strong></li>
+              <li>Sahifani yangilang: <strong>Ctrl + Shift + R</strong></li>
+            </ol>
+            <p class="checkin-camera-help-note">Windows: Sozlamalar → Maxfiylik → Kamera → Chrome yoqilgan bo‘lsin</p>
+            <div class="checkin-camera-help-actions">
+              <button type="button" class="btn-primary btn-sm" onclick="openQrCamera()">Qayta urinish</button>
+              <button type="button" class="btn-outline btn-sm" onclick="openQrPhotoCapture()">QR rasm tanlash</button>
+            </div>
+            <button type="button" class="link-btn checkin-settings-link" onclick="openCameraSettings()">Brauzer kamera sozlamalari</button>
+          </div>
+          <input type="file" id="qr-file-input" accept="image/*" capture="user" hidden onchange="handleQrImageFile(this)" />
+          <div class="checkin-corners">
+            <span class="c-tl"></span><span class="c-tr"></span>
+            <span class="c-bl"></span><span class="c-br"></span>
+          </div>
+          <div id="checkin-processing" class="checkin-processing" hidden>
+            <div class="loader" style="position:static;border-color:rgba(255,255,255,.3);border-top-color:#fff"></div>
+          </div>
+        </div>
+
+        <p class="checkin-info">ℹ️ QR kodni ish joyingizdagi qurilmada skaner qiling.</p>
+
+        <div class="checkin-card">
+          <div class="checkin-card-icon">🕐</div>
+          <div>
+            <div class="checkin-card-label">Sizning ish vaqtingiz</div>
+            <div class="checkin-card-value">09:00 - 18:00</div>
+          </div>
+        </div>
+
+        <div class="checkin-card checkin-card-blue">
+          <div class="checkin-card-icon">🛡️</div>
+          <div>
+            <div class="checkin-card-title">Joylashuv nazorati yoqilgan</div>
+            <div class="checkin-card-desc">Ishga kelganingiz joylashuv orqali tasdiqlanadi.</div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-outline checkin-demo-btn" id="checkin-demo-btn" onclick="demoQrScan()">
+          Demo: QR skanerlash
+        </button>
+        <button type="button" class="btn-outline checkin-qr-download" onclick="downloadWorkplaceQrPng()">
+          📥 QR PNG yuklab olish
+        </button>
+        <p class="checkin-demo-hint" id="checkin-demo-hint">
+          Doimiy QR: <strong>WRK-SMART-2026-001</strong> (har kuni, barcha xodimlar uchun)
+          · <a href="/assets/workrank-ishxona-qr.png" download="workrank-ishxona-qr.png" style="color:var(--primary)">PNG</a>
+          · <a href="/workplace-qr.html" style="color:var(--primary)">Chop etish</a>
+        </p>
       </div>
     </div>
 
@@ -105,9 +196,9 @@
           <div class="attendance-row">
             <div><span>🟢 Kelgan</span><strong id="check-in">08:12</strong></div>
             <div class="divider"></div>
-            <div><span>🔴 Ketgan</span><strong>18:00</strong></div>
+            <div><span>🔴 Ketgan</span><strong id="check-out">—</strong></div>
           </div>
-          <button class="btn-primary" onclick="doCheckIn()">📱 QR Davomat</button>
+          <button class="btn-primary" id="qr-attendance-btn" onclick="doCheckIn()">📱 QR Davomat</button>
         </div>
         <h3 class="section-title">Statistika</h3>
         <div class="stats-grid">
@@ -151,16 +242,41 @@
         <div class="story-tap-right" onclick="nextStory()"></div>
       </div>
 
-      <!-- DISLIKE MODAL -->
-      <div id="dislike-modal" class="modal">
-        <div class="modal-content">
-          <h3>Kamchilik haqida ma'lumot</h3>
-          <label>Kamchilik turi</label>
-          <div class="chips" id="dislike-chips"></div>
-          <label>Izoh yozing...</label>
-          <textarea id="dislike-comment" rows="4" placeholder="Kamchilik tavsifini yozing..."></textarea>
-          <button class="btn-primary" onclick="saveDislike()">Saqlash</button>
-          <button class="btn-cancel" onclick="closeDislike()">Bekor qilish</button>
+      <!-- INSTAGRAM COMMENT SHEET -->
+      <div id="comment-sheet" class="ig-sheet">
+        <div class="ig-sheet-backdrop" onclick="closeCommentSheet()"></div>
+        <div class="ig-sheet-panel">
+          <div class="ig-sheet-handle"></div>
+          <header class="ig-sheet-header">
+            <span id="sheet-title" class="ig-sheet-title">Izohlar</span>
+            <button type="button" class="ig-sheet-close" onclick="closeCommentSheet()" aria-label="Yopish">✕</button>
+          </header>
+
+          <div id="dislike-extra" class="ig-dislike-extra" hidden>
+            <p class="ig-dislike-label">Kamchilik turi <span>*</span></p>
+            <div class="ig-chips-scroll">
+              <div class="chips" id="dislike-chips"></div>
+            </div>
+          </div>
+
+          <div class="ig-comments-list" id="comments-list"></div>
+
+          <div class="ig-comment-bar">
+            <img id="comment-bar-avatar" class="ig-comment-bar-avatar" src="" alt="" />
+            <div class="ig-input-wrap">
+              <input
+                id="comment-input"
+                type="text"
+                placeholder="Izoh qo'shing..."
+                autocomplete="off"
+                oninput="updateCommentPostBtn()"
+                onkeydown="handleCommentKeydown(event)"
+              />
+            </div>
+            <button type="button" id="comment-post-btn" class="ig-post-btn" disabled onclick="submitCommentSheet()">Yuborish</button>
+          </div>
+
+          <div id="vk-keyboard" class="vk-keyboard" aria-label="Klaviatura"></div>
         </div>
       </div>
 
@@ -185,6 +301,9 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

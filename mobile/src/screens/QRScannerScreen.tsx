@@ -6,11 +6,20 @@ import { useNavigation } from '@react-navigation/native';
 import { useApp } from '../context/AppContext';
 import { Colors, Radius, Spacing } from '../constants/theme';
 
+const VALID_QR_DEMO = 'WRK-SMART-2026-001';
+
+function isValidWorkQr(data: string) {
+  return data.startsWith('WRK-') || data.includes('WORKRANK');
+}
+
 export default function QRScannerScreen() {
   const navigation = useNavigation();
-  const { checkIn } = useApp();
+  const { attendanceStatus, completeEveningCheckOut } = useApp();
   const [permission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
+
+  const isCheckout = attendanceStatus === 'working';
+  const hint = isCheckout ? 'Ketish uchun QR kodni skanerlang' : 'Ishxona QR kodini skanerlang';
 
   if (!permission) return <View style={styles.container} />;
 
@@ -25,18 +34,27 @@ export default function QRScannerScreen() {
     );
   }
 
-  const handleScan = ({ data }: { data: string }) => {
+  const handleScan = async ({ data }: { data: string }) => {
     if (scanned) return;
-    setScanned(true);
-    if (data.startsWith('WRK-') || data.includes('WORKRANK')) {
-      checkIn();
-      Alert.alert('Muvaffaqiyat', 'Davomat muvaffaqiyatli qayd etildi!', [
-        { text: 'OK', onPress: () => navigation.goBack() },
-      ]);
-    } else {
-      Alert.alert('Xato', 'Noto\'g\'ri QR kod', [
+    if (!isValidWorkQr(data)) {
+      Alert.alert('Xato', "Noto'g'ri QR kod", [
         { text: 'Qayta', onPress: () => setScanned(false) },
       ]);
+      return;
+    }
+
+    if (!isCheckout) {
+      Alert.alert('Xato', 'Avval ertalab ishga kelish QR skanerini bajaring.');
+      return;
+    }
+
+    setScanned(true);
+    try {
+      await completeEveningCheckOut();
+      Alert.alert('Muvaffaqiyat', 'Ish kuni yakunlandi. Xayr!');
+    } catch {
+      setScanned(false);
+      Alert.alert('Xato', "Ketish qayd etilmadi. Qayta urinib ko'ring.");
     }
   };
 
@@ -44,7 +62,7 @@ export default function QRScannerScreen() {
     <View style={styles.container}>
       <CameraView
         style={StyleSheet.absoluteFillObject}
-        facing="back"
+        facing="front"
         barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
         onBarcodeScanned={scanned ? undefined : handleScan}
       />
@@ -58,8 +76,11 @@ export default function QRScannerScreen() {
           <View style={styles.cornerBL} />
           <View style={styles.cornerBR} />
         </View>
-        <Text style={styles.hint}>Ishxona QR kodini skanerlang</Text>
-        <Text style={styles.qrDemo}>Demo QR: WRK-SMART-2026-001</Text>
+        <Text style={styles.hint}>{hint}</Text>
+        <TouchableOpacity style={styles.demoBtn} onPress={() => handleScan({ data: VALID_QR_DEMO })}>
+          <Text style={styles.demoBtnText}>Demo: QR skanerlash</Text>
+        </TouchableOpacity>
+        <Text style={styles.qrDemo}>Demo QR: {VALID_QR_DEMO}</Text>
       </SafeAreaView>
     </View>
   );
@@ -77,6 +98,15 @@ const styles = StyleSheet.create({
   cornerBL: { ...corner, bottom: 0, left: 0, borderBottomWidth: 4, borderLeftWidth: 4 },
   cornerBR: { ...corner, bottom: 0, right: 0, borderBottomWidth: 4, borderRightWidth: 4 },
   hint: { color: '#fff', fontSize: 16, marginTop: Spacing.lg, fontWeight: '600' },
+  demoBtn: {
+    marginTop: Spacing.md,
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: 10,
+    borderRadius: Radius.md,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.7)',
+  },
+  demoBtnText: { color: '#fff', fontWeight: '700' },
   qrDemo: { color: 'rgba(255,255,255,0.6)', fontSize: 12, marginTop: Spacing.sm },
   message: { textAlign: 'center', color: Colors.text, fontSize: 16, margin: Spacing.lg },
   btn: {

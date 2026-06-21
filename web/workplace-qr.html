@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorkRank — Ishxona QR kodi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f8fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .wrap { max-width: 480px; margin: 0 auto; }
+    .brand {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    #qr-canvas {
+      width: 260px;
+      height: 260px;
+      margin: 0 auto 16px;
+      border-radius: 12px;
+    }
+    .code {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .code-label { font-size: 13px; color: var(--muted); }
+    .info {
+      margin-top: 20px;
+      text-align: left;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #1e40af;
+    }
+    .info strong { display: block; margin-bottom: 6px; font-size: 14px; }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      flex: 1;
+      min-width: 140px;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .print-only { display: none; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .actions, .subtitle { display: none; }
+      .print-only { display: block; }
+      .card { box-shadow: none; border: 2px solid #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">WORKRANK</div>
+    <p class="subtitle">Ishxona davomat QR kodi — chop etib, kirish joyiga osing</p>
+
+    <div class="card">
+      <canvas id="qr-canvas"></canvas>
+      <div class="code" id="qr-code-text">WRK-SMART-2026-001</div>
+      <div class="code-label">Ishxona identifikatori</div>
+
+      <div class="info">
+        <strong>Qanday ishlatiladi?</strong>
+        Xodim ertalab ilovani ochganda ushbu QR kodni skaner qiladi.
+        Faqat shundan keyin ish kuni boshlanadi va davomat DB ga yoziladi.
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="button" onclick="window.print()">Chop etish</button>
+        <a class="btn btn-outline" id="download-link" download="workrank-ishxona-qr.png">PNG yuklab olish</a>
+        <a class="btn btn-outline" href="/">Ilovaga qaytish</a>
+      </div>
+    </div>
+
+    <p class="print-only" style="text-align:center;margin-top:16px;font-size:12px;color:#6b7280;">
+      WorkRank davomat tizimi — QR kodni skaner qiling
+    </p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script>
+    const WORKPLACE_QR = 'WRK-SMART-2026-001';
+    const canvas = document.getElementById('qr-canvas');
+
+    QRCode.toCanvas(canvas, WORKPLACE_QR, {
+      width: 260,
+      margin: 2,
+      color: { dark: '#111827', light: '#ffffff' },
+    }, () => {
+      const pngUrl = canvas.toDataURL('image/png');
+      document.getElementById('download-link').href = pngUrl;
+      document.getElementById('download-link').onclick = (e) => {
+        e.preventDefault();
+        const link = document.createElement('a');
+        link.href = pngUrl;
+        link.download = 'workrank-ishxona-qr.png';
+        link.click();
+      };
+    });
+  </script>
+</body>
+</html>

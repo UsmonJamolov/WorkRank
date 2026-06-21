@@ -1,28 +1,34 @@
 const express = require('express');
+const User = require('../models/User');
+
 const router = express.Router();
 
-const ratings = {
-  daily: [
-    { rank: 1, fullName: 'Azizbek', points: 240, position: 'Elektr montajchi' },
-    { rank: 2, fullName: 'Bekzod', points: 220, position: 'Elektr montajchi' },
-    { rank: 3, fullName: 'Jamshid', points: 210, position: 'Diagnost' },
-  ],
-  weekly: [
-    { rank: 1, fullName: 'Bekzod', points: 980, position: 'Elektr montajchi' },
-    { rank: 2, fullName: 'Azizbek', points: 920, position: 'Elektr montajchi' },
-    { rank: 3, fullName: 'Jamshid', points: 850, position: 'Diagnost' },
-  ],
-  monthly: [
-    { rank: 1, fullName: 'Azizbek', points: 1200, position: 'Elektr montajchi' },
-    { rank: 2, fullName: 'Bekzod', points: 980, position: 'Elektr montajchi' },
-    { rank: 3, fullName: 'Jamshid', points: 870, position: 'Diagnost' },
-  ],
-};
+router.get('/:period', async (req, res) => {
+  try {
+    const { period } = req.params;
+    if (!['daily', 'weekly', 'monthly'].includes(period)) {
+      return res.status(400).json({ error: 'Noto\'g\'ri davr' });
+    }
 
-router.get('/:period', (req, res) => {
-  const { period } = req.params;
-  if (!ratings[period]) return res.status(400).json({ error: 'Noto\'g\'ri davr' });
-  res.json(ratings[period]);
+    const limit = period === 'daily' ? 10 : period === 'weekly' ? 10 : 10;
+    const users = await User.find({ role: 'employee' })
+      .sort({ points: -1 })
+      .limit(limit);
+
+    const divisor = period === 'daily' ? 5 : period === 'weekly' ? 1.2 : 1;
+
+    res.json(
+      users.map((u, i) => ({
+        rank: i + 1,
+        fullName: u.fullName,
+        avatar: u.avatar,
+        points: Math.round(u.points / divisor),
+        position: u.position,
+      }))
+    );
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;
